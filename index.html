@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>CDW – Generador de Paletas de Color</title>
 
+    <!-- Montserrat para los códigos del modal -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
+          rel="stylesheet" />
+
     <!-- Tailwind + Fuentes -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;700&display=swap"
@@ -21,19 +25,20 @@
         <hr class="w-full max-w-xl border-t-2 border-cyan-400 mt-4 mx-auto" />
     </section>
 
-    <!-- Toolbar (ahora fuera del main, con fondo blanco) -->
-    <div id="toolbar" class="mt-14 relative w-full bg-white text-black flex items-center justify-between px-6 py-2 z-30 shadow">
+    <!-- Toolbar -->
+    <div id="toolbar"
+         class="mt-14 w-full bg-white text-black flex items-center justify-between px-6 py-2 shadow z-30">
         <div class="text-sm font-poppins">
             Pulsa la <kbd class="border px-1 rounded bg-gray-100">Barra de espacio</kbd> para generar colores
         </div>
         <div class="flex items-center space-x-4">
-            <button id="undoBtn" class="flex items-center space-x-1 hover:opacity-80">
-                <img src="img/undo.svg" alt="Undo" class="w-5 h-5" draggable="false">
-                <span class="text-sm">Undo</span>
+            <button id="undoBtn" disabled class="flex items-center space-x-1 hover:opacity-80">
+                <img src="img/undo.svg" alt="Deshacer" class="w-5 h-5" draggable="false">
+                <span class="text-sm">Deshacer</span>
             </button>
-            <button id="redoBtn" class="flex items-center space-x-1 hover:opacity-80">
-                <img src="img/redo.svg" alt="Redo" class="w-5 h-5" draggable="false">
-                <span class="text-sm">Redo</span>
+            <button id="redoBtn" disabled class="flex items-center space-x-1 hover:opacity-80">
+                <img src="img/redo.svg" alt="Rehacer" class="w-5 h-5" draggable="false">
+                <span class="text-sm">Rehacer</span>
             </button>
             <div class="w-px h-6 bg-black/20"></div>
             <button id="viewBtn" class="flex items-center space-x-1 hover:opacity-80">
@@ -83,10 +88,22 @@
         </div>
     </div>
 
+    <!-- Modal Ver Paleta -->
+    <div id="viewModal" class="hidden fixed inset-0 flex items-center justify-center z-40">
+        <div id="viewOverlay" class="absolute inset-0"></div>
+        <div class="relative bg-white rounded-lg shadow-xl p-6 w-full max-w-xl">
+            <button id="closeView" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+            <h2 class="font-montserrat font-semibold uppercase text-base text-black text-center mb-6">
+                Vista de Colores
+            </h2>
+            <ul id="viewList" class="space-y-4 mt-12"></ul>
+        </div>
+    </div>
+
     <!-- Toast -->
     <div id="toast"
-         class="fixed bottom-[-100px] left-1/2 transform -translate-x-1/2 bg-black text-white px-6 py-3 rounded-full font-semibold text-sm shadow-lg opacity-0 transition-all duration-300 ease-in-out z-50">
-        ✅ Color copiado al portapapeles
+         class="fixed bottom-[-100px] left-1/2 transform -translate-x-1/2 bg-black text-white px-6 py-3 rounded-full text-sm shadow-lg opacity-0 transition-all duration-300 ease-in-out z-50">
+        ✅ Copiado!
     </div>
 
     <script src="script.js"></script>
