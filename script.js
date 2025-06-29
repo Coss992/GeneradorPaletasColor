@@ -178,16 +178,22 @@ function paint(p) {
     p.el.style.background = toCss(p.color);
     const hexEl = p.el.querySelector('.hex');
     hexEl.textContent = toHex(p.color);
+    // decidir si texto claro/oscuro
     const { r, g, b } = hslToRgb(p.color.h, p.color.s, p.color.l);
     const bri = (r * 299 + g * 587 + b * 114) / 1000;
     const tone = bri > 186 ? 'B' : 'W';
     const txt = tone === 'B' ? '#000' : '#fff';
     hexEl.style.color = txt;
+
     ['lock', 'copy', 'drag', 'remove'].forEach(cls => {
         const img = p.el.querySelector('.' + cls);
-        img.src = `img/${cls}${tone}.svg`;
+        if (!img) return;
+        let prefix = cls;
+        if (cls === 'copy') prefix = 'copiar';      // <–– aquí!
+        img.src = `img/${prefix}${tone}.svg`;
     });
 }
+
 
 // —— Generar paleta ——
 function generatePalette() {
