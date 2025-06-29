@@ -1,113 +1,160 @@
 ﻿@layer base {
-  body {
-    font-family: 'Poppins', sans-serif;
-  }
-  .font-anton {
-    font-family: 'Anton', sans-serif;
-  }
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .font-anton {
+        font-family: 'Anton', sans-serif;
+    }
 }
 
 /* — Paneles de color — */
 .panel {
-  flex: 1;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  transition: transform 200ms ease, background 0.3s;
-  cursor: default;
-}
-.panel.dragging {
-  transition: none !important;
-  z-index: 50;
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    /* Animación para vecinos (FLIP) */
+    transition: transform 600ms cubic-bezier(0.22,1,0.36,1), background 0.3s;
+    cursor: default;
 }
 
-.panel .lock,
-.panel .copy,
-.panel .remove,
-.panel .drag {
-  display: none;
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  pointer-events: auto;
-  cursor: pointer;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.panel .lock    { bottom: 10rem; }
-.panel .copy    { bottom: 14rem; }
-.panel .remove  { bottom: 18rem; }
-.panel .drag    { bottom: 22rem; }
+    .panel.dragging {
+        transition: none !important;
+        z-index: 50;
+    }
 
-.panel:hover .lock,
-.panel.locked .lock { display: block; }
-.panel:hover .copy        { display: block; }
-.panel:hover .remove      { display: block; }
-.panel:hover .drag        { display: block; }
+    /* Iconos */
+    .panel .lock,
+    .panel .copy,
+    .panel .remove,
+    .panel .drag {
+        display: none;
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        pointer-events: auto;
+        cursor: pointer;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
-/* — HEX y nombre — */
-.panel .hex {
-  font-size: 2rem;
-  font-weight: 700;
-  text-shadow: 0 0 5px rgba(0,0,0,0.5);
-  margin-top: 1rem;
-  margin-bottom: 0.25rem;
-  cursor: pointer;
-}
-.panel .name {
-  font-size: 0.875rem;
-  opacity: 0.7;
-  margin-bottom: 1rem;
-}
+    .panel .lock {
+        bottom: 10rem;
+    }
+
+    .panel .copy {
+        bottom: 14rem;
+    }
+
+    .panel .remove {
+        bottom: 18rem;
+    }
+
+    .panel .drag {
+        bottom: 22rem;
+    }
+
+    .panel:hover .lock,
+    .panel.locked .lock {
+        display: block;
+    }
+
+    .panel:hover .copy {
+        display: block;
+    }
+
+    .panel:hover .remove {
+        display: block;
+    }
+
+    .panel:hover .drag {
+        display: block;
+    }
+
+    /* — HEX y nombre — */
+    .panel .hex {
+        font-size: 2rem;
+        font-weight: 700;
+        text-shadow: 0 0 5px rgba(0,0,0,0.5);
+        margin-top: 1rem;
+        margin-bottom: 0.25rem;
+        cursor: pointer;
+    }
+
+    .panel .name {
+        font-size: 0.875rem;
+        opacity: 0.7;
+        margin-bottom: 1rem;
+    }
 
 /* — Separators between panels — */
 #separators {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 20;
-}
-.separator {
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 2px;
-  pointer-events: auto;
-}
-.separator button {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  width: 2.5rem; height: 2.5rem;
-  border-radius: 9999px;
-  background: white;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.2s;
-  z-index: 25;
-}
-.separator:hover button {
-  opacity: 1;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
 }
 
-/* — Animación de entrada texto — */
-@keyframes fadeSlideUp {
-  from { opacity: 0; transform: translateY(50px); }
-  to   { opacity: 1; transform: translateY(0); }
+.separator {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    /* Hacemos el área del separator tan ancho como el botón */
+    width: 2.5rem;
+    /* Centramos el separator respecto al izquierdo calculado */
+    margin-left: calc(-1.25rem);
+    pointer-events: auto;
 }
+
+    .separator button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 9999px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.2s;
+        z-index: 25;
+    }
+
+    .separator:hover button {
+        opacity: 1;
+    }
+
+/* — Fade-in texto — */
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .fade-slide-up {
-  animation: fadeSlideUp 0.9s ease-out both;
+    animation: fadeSlideUp 0.9s ease-out both;
 }
 
 /* — Inspector sliders — */
 #inspector input[type="range"] {
-  accent-color: #4f46e5;
+    accent-color: #4f46e5;
 }
 
 /* — Toast Animaciones — */
 #toast.show {
-  bottom: 2rem;
-  opacity: 1;
+    bottom: 2rem;
+    opacity: 1;
 }
