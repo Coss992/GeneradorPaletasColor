@@ -3,23 +3,28 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>CDW – Color Hub</title>
+    <title>CDW – Generador de Paletas de Color</title>
 
     <!-- Tailwind + Fuentes -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;700&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gradient-to-br from-gray-900 to-slate-800 min-h-screen flex flex-col text-white">
 
-    <!-- Header -->
-    <header class="py-4 text-center text-2xl font-bold font-anton">
-        CDW – Color Hub
-    </header>
+    <!-- Título -->
+    <section class="text-center mt-8 fade-slide-up">
+        <h1 class="text-4xl md:text-6xl font-bold font-poppins mb-2 flex items-center justify-center gap-4">
+            <span>🎨</span> Generador de Paletas de Color
+        </h1>
+        <hr class="w-full max-w-xl border-t-2 border-cyan-400 mt-4 mx-auto">
+    </section>
 
-    <!-- Paleta -->
-    <main class="flex-grow flex">
+    <!-- Paleta + Separators -->
+    <main class="flex-grow relative flex mt-12">
         <div id="palette" class="flex flex-1"></div>
+        <div id="separators"></div>
     </main>
 
     <!-- Footer -->
@@ -46,7 +51,8 @@
                 </label>
             </div>
             <div class="mt-6 text-right">
-                <button id="closeInspector" class="px-4 py-2 bg-indigo-600 text-white rounded font-poppins">
+                <button id="closeInspector"
+                        class="px-4 py-2 bg-indigo-600 text-white rounded font-poppins">
                     Cerrar
                 </button>
             </div>
@@ -54,7 +60,11 @@
     </div>
 
     <!-- Toast -->
-    <div id="toast" class="fixed bottom-[-100px] left-1/2 transform -translate-x-1/2 bg-black text-white px-6 py-3 rounded-full font-semibold text-sm shadow-lg opacity-0 transition-all duration-300 ease-in-out z-50">
+    <div id="toast"
+         class="fixed bottom-[-100px] left-1/2 transform -translate-x-1/2
+                bg-black text-white px-6 py-3 rounded-full
+                font-semibold text-sm shadow-lg
+                opacity-0 transition-all duration-300 ease-in-out z-50">
         ✅ Color copiado al portapapeles
     </div>
 
