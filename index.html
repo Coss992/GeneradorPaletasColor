@@ -1,78 +1,94 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>CDW – Generador de Paletas de Color</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>CDW – Generador de Paletas de Color</title>
 
-  <!-- Tailwind + Fuentes -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="style.css" />
+    <!-- Tailwind + Fuentes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;700&display=swap"
+          rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body class="bg-gradient-to-br from-gray-900 to-slate-800 min-h-screen flex flex-col text-white select-none">
 
-  <!-- Título -->
-  <section class="text-center mt-8 fade-slide-up">
-    <h1
-      class="text-4xl md:text-6xl font-bold font-poppins mb-2 flex items-center justify-center gap-4"
-    >
-      <span>🎨</span> Generador de Paletas de Color
-    </h1>
-    <hr class="w-full max-w-xl border-t-2 border-cyan-400 mt-4 mx-auto" />
-  </section>
+    <!-- Título -->
+    <section class="text-center mt-8 fade-slide-up">
+        <h1 class="text-4xl md:text-6xl font-bold font-poppins mb-2 flex items-center justify-center gap-4">
+            <span>🎨</span> Generador de Paletas de Color
+        </h1>
+        <hr class="w-full max-w-xl border-t-2 border-cyan-400 mt-4 mx-auto" />
+    </section>
 
-  <!-- Paleta + Separators -->
-  <main class="flex-grow relative flex mt-12">
-    <div id="palette" class="flex flex-1"></div>
-    <div id="separators"></div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-black text-white text-sm text-center py-4">
-    © CossDevWork – 2025
-  </footer>
-
-  <!-- Inspector HSL -->
-  <div
-    id="inspector"
-    class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-  >
-    <div class="bg-white rounded-lg p-6 w-80 shadow-xl">
-      <h2 class="font-poppins font-semibold text-lg mb-4">Editar color</h2>
-      <div class="space-y-4">
-        <label class="block font-poppins">
-          H:<input id="hRange" type="range" min="0" max="360" class="w-full" />
-        </label>
-        <label class="block font-poppins">
-          S:<input id="sRange" type="range" min="0" max="100" class="w-full" />
-        </label>
-        <label class="block font-poppins">
-          L:<input id="lRange" type="range" min="0" max="100" class="w-full" />
-        </label>
-      </div>
-      <div class="mt-6 text-right">
-        <button
-          id="closeInspector"
-          class="px-4 py-2 bg-indigo-600 text-white rounded font-poppins"
-        >
-          Cerrar
-        </button>
-      </div>
+    <!-- Toolbar (ahora fuera del main, con fondo blanco) -->
+    <div id="toolbar" class="mt-14 relative w-full bg-white text-black flex items-center justify-between px-6 py-2 z-30 shadow">
+        <div class="text-sm font-poppins">
+            Pulsa la <kbd class="border px-1 rounded bg-gray-100">Barra de espacio</kbd> para generar colores
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="undoBtn" class="flex items-center space-x-1 hover:opacity-80">
+                <img src="img/undo.svg" alt="Undo" class="w-5 h-5" draggable="false">
+                <span class="text-sm">Undo</span>
+            </button>
+            <button id="redoBtn" class="flex items-center space-x-1 hover:opacity-80">
+                <img src="img/redo.svg" alt="Redo" class="w-5 h-5" draggable="false">
+                <span class="text-sm">Redo</span>
+            </button>
+            <div class="w-px h-6 bg-black/20"></div>
+            <button id="viewBtn" class="flex items-center space-x-1 hover:opacity-80">
+                <img src="img/view.svg" alt="Ver" class="w-5 h-5" draggable="false">
+                <span class="text-sm">Ver</span>
+            </button>
+            <button id="exportBtn" class="flex items-center space-x-1 hover:opacity-80">
+                <img src="img/export.svg" alt="Exportar" class="w-5 h-5" draggable="false">
+                <span class="text-sm">Exportar</span>
+            </button>
+        </div>
     </div>
-  </div>
 
-  <!-- Toast -->
-  <div
-    id="toast"
-    class="fixed bottom-[-100px] left-1/2 transform -translate-x-1/2 bg-black text-white px-6 py-3 rounded-full font-semibold text-sm shadow-lg opacity-0 transition-all duration-300 ease-in-out z-50"
-  >
-    ✅ Color copiado al portapapeles
-  </div>
+    <!-- Paleta + Separators -->
+    <main class="flex-grow relative flex mt-0">
+        <div id="palette" class="flex flex-1"></div>
+        <div id="separators"></div>
+    </main>
 
-  <script src="script.js"></script>
+    <!-- Footer -->
+    <footer class="bg-black text-white text-sm text-center py-4">
+        © CossDevWork – 2025
+    </footer>
+
+    <!-- Inspector HSL -->
+    <div id="inspector"
+         class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-80 shadow-xl">
+            <h2 class="font-poppins font-semibold text-lg mb-4">Editar color</h2>
+            <div class="space-y-4">
+                <label class="block font-poppins">
+                    H:<input id="hRange" type="range" min="0" max="360" class="w-full" />
+                </label>
+                <label class="block font-poppins">
+                    S:<input id="sRange" type="range" min="0" max="100" class="w-full" />
+                </label>
+                <label class="block font-poppins">
+                    L:<input id="lRange" type="range" min="0" max="100" class="w-full" />
+                </label>
+            </div>
+            <div class="mt-6 text-right">
+                <button id="closeInspector"
+                        class="px-4 py-2 bg-indigo-600 text-white rounded font-poppins">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast"
+         class="fixed bottom-[-100px] left-1/2 transform -translate-x-1/2 bg-black text-white px-6 py-3 rounded-full font-semibold text-sm shadow-lg opacity-0 transition-all duration-300 ease-in-out z-50">
+        ✅ Color copiado al portapapeles
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

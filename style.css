@@ -8,6 +8,15 @@
     }
 }
 
+/* Toolbar */
+#toolbar {
+    /* Ya tiene bg-white y texto negro desde Tailwind */
+}
+
+    #toolbar button {
+        user-select: none;
+    }
+
 /* — Paneles de color — */
 .panel {
     flex: 1;
@@ -25,12 +34,11 @@
         z-index: 50;
     }
 
-    /* Iconos */
+    /* Iconos dentro del panel */
     .panel .lock,
     .panel .copy,
-    .panel .drag,
-    .panel .remove {
-        display: none;
+    .panel .remove,
+    .panel .drag {
         position: absolute;
         width: 24px;
         height: 24px;
@@ -42,38 +50,47 @@
 
     .panel .lock {
         bottom: 10rem;
+        display: none;
     }
 
     .panel .copy {
         bottom: 14rem;
+        display: none;
     }
 
     .panel .drag {
         bottom: 18rem;
+        display: none;
     }
 
+    /* El botón de “remove” está oculto por defecto */
     .panel .remove {
         bottom: 22rem;
+        display: none;
     }
 
+    /* Mostrar lock siempre en hover (o si está locked) */
     .panel:hover .lock,
     .panel.locked .lock {
         display: block;
     }
 
+    /* Mostrar copy en hover */
     .panel:hover .copy {
         display: block;
     }
 
-    .panel.more-than-two:hover .remove {
-        display: block;
-    }
-
+    /* Mostrar drag en hover */
     .panel:hover .drag {
         display: block;
     }
 
-    /* — HEX y nombre — */
+    /* Mostrar remove **solo** si el panel tiene la clase .more-than-two */
+    .panel.more-than-two:hover .remove {
+        display: block;
+    }
+
+    /* HEX y nombre */
     .panel .hex {
         font-size: 2rem;
         font-weight: 700;
@@ -89,7 +106,7 @@
         margin-bottom: 1rem;
     }
 
-/* — Separators between panels — */
+/* Separators */
 #separators {
     position: absolute;
     inset: 0;
@@ -102,7 +119,7 @@
     top: 0;
     bottom: 0;
     width: 2.5rem;
-    margin-left: -1.25rem;
+    margin-left: calc(-1.25rem);
     pointer-events: auto;
 }
 
@@ -128,7 +145,7 @@
         opacity: 1;
     }
 
-/* — Fade-in texto — */
+/* Fade-in texto */
 @keyframes fadeSlideUp {
     from {
         opacity: 0;
@@ -145,12 +162,12 @@
     animation: fadeSlideUp 0.9s ease-out both;
 }
 
-/* — Inspector sliders — */
+/* Inspector sliders */
 #inspector input[type="range"] {
     accent-color: #4f46e5;
 }
 
-/* — Toast Animaciones — */
+/* Toast animaciones */
 #toast.show {
     bottom: 2rem;
     opacity: 1;
