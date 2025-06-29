@@ -97,7 +97,7 @@
             <h2 class="font-montserrat font-semibold uppercase text-base text-black text-center mb-6">
                 Exportar Paleta
             </h2>
-            <div class="grid grid-cols-3 gap-4">
+            <div class="grid grid-cols-2 gap-4">
                 <button data-format="image" class="flex flex-col items-center p-4 bg-gray-100 rounded-lg hover:bg-gray-200">
                     <img src="img/image.svg" alt="Imagen" class="w-8 h-8 mb-2">
                     <span class="text-sm font-montserrat text-black">IMAGEN</span>
@@ -109,14 +109,6 @@
                 <button data-format="css" class="flex flex-col items-center p-4 bg-gray-100 rounded-lg hover:bg-gray-200">
                     <img src="img/css.svg" alt="CSS" class="w-8 h-8 mb-2">
                     <span class="text-sm font-montserrat text-black">CSS</span>
-                </button>
-                <button data-format="svg" class="flex flex-col items-center p-4 bg-gray-100 rounded-lg hover:bg-gray-200">
-                    <img src="img/svg.svg" alt="SVG" class="w-8 h-8 mb-2">
-                    <span class="text-sm font-montserrat text-black">SVG</span>
-                </button>
-                <button data-format="ase" class="flex flex-col items-center p-4 bg-gray-100 rounded-lg hover:bg-gray-200">
-                    <img src="img/ase.svg" alt="ASE" class="w-8 h-8 mb-2">
-                    <span class="text-sm font-montserrat text-black">ASE</span>
                 </button>
                 <button data-format="code" class="flex flex-col items-center p-4 bg-gray-100 rounded-lg hover:bg-gray-200">
                     <img src="img/code.svg" alt="Code" class="w-8 h-8 mb-2">
@@ -132,6 +124,8 @@
         ✅ Copiado!
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
