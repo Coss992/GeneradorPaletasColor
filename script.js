@@ -327,3 +327,53 @@ for (let i = 0; i < NUM_PANELS; i++) {
 repaintSeparators();
 updateRemove();
 updateUndoRedo();
+
+// ** Export Modal **
+const exportBtnMain = document.getElementById('exportBtn');
+const exportModal = document.getElementById('exportModal');
+const exportOverlay = document.getElementById('exportOverlay');
+const closeExport = document.getElementById('closeExport');
+
+exportBtnMain.addEventListener('click', () => {
+    exportModal.classList.remove('hidden');
+});
+closeExport.addEventListener('click', () => {
+    exportModal.classList.add('hidden');
+});
+exportOverlay.addEventListener('click', () => {
+    exportModal.classList.add('hidden');
+});
+
+exportModal.querySelectorAll('button[data-format]').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const fmt = btn.dataset.format;
+        console.log('Exportando como', fmt);
+        // aquí llamas a tu función:
+        //  exportPalette(fmt);
+        exportModal.classList.add('hidden');
+    });
+});
+
+// Stub de exportación
+function exportPalette(format) {
+    switch (format) {
+        case 'image':
+            // html2canvas o similar…
+            break;
+        case 'pdf':
+            // jsPDF…
+            break;
+        case 'css':
+            // generar variables CSS…
+            break;
+        case 'svg':
+            // montar string SVG…
+            break;
+        case 'ase':
+            // usar librería ASE…
+            break;
+        case 'code':
+            // JSON o snippet JS…
+            break;
+    }
+}
