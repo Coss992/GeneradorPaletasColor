@@ -16,7 +16,6 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
-    /* Animación para vecinos (FLIP) */
     transition: transform 600ms cubic-bezier(0.22,1,0.36,1), background 0.3s;
     cursor: default;
 }
@@ -29,8 +28,8 @@
     /* Iconos */
     .panel .lock,
     .panel .copy,
-    .panel .remove,
-    .panel .drag {
+    .panel .drag,
+    .panel .remove {
         display: none;
         position: absolute;
         width: 24px;
@@ -49,11 +48,11 @@
         bottom: 14rem;
     }
 
-    .panel .remove {
+    .panel .drag {
         bottom: 18rem;
     }
 
-    .panel .drag {
+    .panel .remove {
         bottom: 22rem;
     }
 
@@ -66,7 +65,7 @@
         display: block;
     }
 
-    .panel:hover .remove {
+    .panel.more-than-two:hover .remove {
         display: block;
     }
 
@@ -102,10 +101,8 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    /* Hacemos el área del separator tan ancho como el botón */
     width: 2.5rem;
-    /* Centramos el separator respecto al izquierdo calculado */
-    margin-left: calc(-1.25rem);
+    margin-left: -1.25rem;
     pointer-events: auto;
 }
 
