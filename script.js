@@ -188,10 +188,20 @@ function paint(p) {
     ['lock', 'copy', 'drag', 'remove'].forEach(cls => {
         const img = p.el.querySelector('.' + cls);
         if (!img) return;
-        let prefix = cls;
-        if (cls === 'copy') prefix = 'copiar';      // <–– aquí!
+
+        let prefix;
+        if (cls === 'lock') {
+            // si está bloqueado ponemos "lock", si no "unlock"
+            prefix = p.locked ? 'lock' : 'unlock';
+        } else if (cls === 'copy') {
+            prefix = 'copiar';
+        } else {
+            prefix = cls;
+        }
+
         img.src = `img/${prefix}${tone}.svg`;
     });
+
 }
 
 
