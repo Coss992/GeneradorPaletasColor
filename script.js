@@ -311,15 +311,19 @@ function updateRemove() {
     });
 }
 
-// —— Listeners básicos ——
+// —— Undo/Redo/Space ——
 undoBtn.addEventListener('click', undo);
 redoBtn.addEventListener('click', redo);
 window.addEventListener('keydown', e => {
+    // si el inspector está abierto, no permitimos SPACE
+    if (!inspector.classList.contains('hidden')) return;
+
     if (e.code === 'Space' && document.activeElement.tagName !== 'INPUT') {
         e.preventDefault();
         generatePalette();
     }
 });
+
 
 // —— Modal Ver ——
 viewBtn.addEventListener('click', () => {
