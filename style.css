@@ -169,10 +169,82 @@
     animation: fadeSlideUp .9s ease-out both;
 }
 
-/* Inspector sliders */
-#inspector input[type="range"] {
-    accent-color: #4f46e5;
+/* Inspector “flotante” centrado y con ANTES / DESPUÉS alineados */
+#inspector {
+    position: fixed;
+    inset: 0;
+    display: none; /* oculto por defecto */
+    align-items: center; /* centrar vertical */
+    justify-content: center; /* centrar horizontal */
+    pointer-events: none; /* deja pasar clicks al fondo */
 }
+
+    #inspector .inspector-box {
+        pointer-events: auto; /* recibe eventos dentro */
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        padding: 1rem;
+        width: 18rem;
+        font-family: 'Montserrat', sans-serif;
+        color: #000;
+    }
+
+        /* Fila ANTES / DESPUÉS */
+        #inspector .inspector-box .swatch-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        #inspector .inspector-box .swatch-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: 600;
+        }
+
+            #inspector .inspector-box .swatch-col span {
+                margin-bottom: 0.25rem;
+            }
+
+        #inspector .inspector-box .swatch {
+            width: 2.5rem;
+            height: 2.5rem;
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+        }
+
+        /* Etiquetas y sliders */
+        #inspector .inspector-box label {
+            display: block;
+            margin-top: 0.75rem;
+        }
+
+            #inspector .inspector-box label span {
+                display: block;
+                margin-bottom: 0.25rem;
+                font-weight: 500;
+            }
+
+        #inspector .inspector-box input[type="range"] {
+            width: 100%;
+            accent-color: #4f46e5;
+        }
+
+        /* Botón cerrar */
+        #inspector .inspector-box #closeInspector {
+            margin-top: 1rem;
+            width: 100%;
+            padding: 0.5rem 0;
+            background: #4F46E5;
+            color: #fff;
+            border: none;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
 
 /* Toast */
 #toast.show {
