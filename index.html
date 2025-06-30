@@ -15,55 +15,72 @@
           rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg-gradient-to-br from-gray-900 to-slate-800 min-h-screen flex flex-col text-white select-none">
+<body class="relative bg-gradient-to-br from-gray-900 to-slate-800 min-h-screen flex flex-col text-white select-none">
 
-    <!-- Título principal -->
-    <section class="text-center mt-8 fade-slide-up">
-        <h1 class="text-4xl md:text-6xl font-bold font-poppins mb-2 flex items-center justify-center gap-4">
-            <span>🎨</span> Generador de Paletas de Color
-        </h1>
-        <hr class="w-full max-w-xl border-t-2 border-cyan-400 mt-4 mx-auto" />
-    </section>
-
-    <!-- Toolbar -->
-    <div id="toolbar" class="mt-14 w-full bg-white text-black flex items-center justify-between px-6 py-2 shadow z-30">
-        <div class="text-sm font-poppins">
-            Pulsa la <kbd class="border px-1 rounded bg-gray-100">Barra de espacio</kbd> para generar colores
-        </div>
-        <div class="flex items-center space-x-4">
-            <button id="undoBtn" disabled class="flex items-center space-x-1 hover:opacity-80">
-                <img src="img/undo.svg" alt="Deshacer" class="w-5 h-5" draggable="false">
-                <span class="text-sm">Deshacer</span>
-            </button>
-            <button id="redoBtn" disabled class="flex items-center space-x-1 hover:opacity-80">
-                <img src="img/redo.svg" alt="Rehacer" class="w-5 h-5" draggable="false">
-                <span class="text-sm">Rehacer</span>
-            </button>
-            <div class="w-px h-6 bg-black/20"></div>
-            <button id="viewBtn" class="flex items-center space-x-1 hover:opacity-80">
-                <img src="img/view.svg" alt="Ver" class="w-5 h-5" draggable="false">
-                <span class="text-sm">Ver</span>
-            </button>
-            <button id="exportBtn" class="flex items-center space-x-1 hover:opacity-80">
-                <img src="img/export.svg" alt="Exportar" class="w-5 h-5" draggable="false">
-                <span class="text-sm">Exportar</span>
-            </button>
-        </div>
+    <!-- OVERLAY MÓVIL -->
+    <div id="mobileOverlay"
+         class="fixed inset-0 bg-black/90 text-white flex-col items-center justify-center p-6 text-center z-50 space-y-4">
+        <div class="text-6xl animate-bounce">📱✋</div>
+        <h1 class="text-2xl font-bold">¡Ups! Esto es para escritorio</h1>
+        <p>Lo sentimos, el Generador de Paletas aún no está disponible en móvil.</p>
+        <a href="https://cdwhub.netlify.app/" target="_blank"
+           class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded font-semibold">
+            Volver al Hub
+        </a>
     </div>
 
-    <!-- Paleta + Separators -->
-    <main class="flex-grow relative flex mt-0">
-        <div id="palette" class="flex flex-1"></div>
-        <div id="separators"></div>
-    </main>
+    <!-- CONTENIDO PRINCIPAL -->
+    <div id="appContent" class="flex flex-col flex-1">
+        <!-- Título principal -->
+        <section class="text-center mt-8 fade-slide-up">
+            <h1 class="text-4xl md:text-6xl font-bold font-poppins mb-2 flex items-center justify-center gap-4">
+                <span>🎨</span> Generador de Paletas de Color
+            </h1>
+            <hr class="w-full max-w-xl border-t-2 border-cyan-400 mt-4 mx-auto" />
+        </section>
 
-    <!-- Footer -->
-    <footer class="bg-black text-white text-sm text-center py-4">
-        © CossDevWork – 2025
-    </footer>
+        <!-- Toolbar -->
+        <div id="toolbar"
+             class="mt-14 w-full bg-white text-black flex items-center justify-between px-6 py-2 shadow z-30">
+            <div class="text-sm font-poppins">
+                Pulsa la <kbd class="border px-1 rounded bg-gray-100">Barra de espacio</kbd> para generar colores
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="undoBtn" disabled class="flex items-center space-x-1 hover:opacity-80">
+                    <img src="img/undo.svg" alt="Deshacer" class="w-5 h-5" draggable="false">
+                    <span class="text-sm">Deshacer</span>
+                </button>
+                <button id="redoBtn" disabled class="flex items-center space-x-1 hover:opacity-80">
+                    <img src="img/redo.svg" alt="Rehacer" class="w-5 h-5" draggable="false">
+                    <span class="text-sm">Rehacer</span>
+                </button>
+                <div class="w-px h-6 bg-black/20"></div>
+                <button id="viewBtn" class="flex items-center space-x-1 hover:opacity-80">
+                    <img src="img/view.svg" alt="Ver" class="w-5 h-5" draggable="false">
+                    <span class="text-sm">Ver</span>
+                </button>
+                <button id="exportBtn" class="flex items-center space-x-1 hover:opacity-80">
+                    <img src="img/export.svg" alt="Exportar" class="w-5 h-5" draggable="false">
+                    <span class="text-sm">Exportar</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Paleta + Separators -->
+        <main class="flex-grow relative flex mt-0">
+            <div id="palette" class="flex flex-1"></div>
+            <div id="separators"></div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-black text-white text-sm text-center py-4">
+            © CossDevWork – 2025
+        </footer>
+    </div>
 
     <!-- Inspector HSL -->
-    <div id="inspector" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div id="inspector"
+         class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
         <div class="bg-white rounded-lg p-6 w-80 shadow-xl">
             <h2 class="font-poppins font-semibold text-lg mb-4">Editar color</h2>
             <div class="space-y-4">
@@ -124,6 +141,7 @@
         ✅ Copiado!
     </div>
 
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>

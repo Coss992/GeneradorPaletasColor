@@ -12,6 +12,23 @@
     }
 }
 
+/* POR DEFECTO ocultamos el overlay móvil */
+#mobileOverlay {
+    display: none;
+}
+
+/* En móvil (hasta 768px) mostramos el overlay y escondemos la app */
+@media (max-width: 768px) {
+    #mobileOverlay {
+        display: flex; /* convierte en flex container */
+        flex-direction: column; /* apilar verticalmente */
+    }
+
+    #appContent {
+        display: none !important;
+    }
+}
+
 /* Toolbar */
 #toolbar button:disabled {
     opacity: 0.4;
